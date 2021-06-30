@@ -55,7 +55,7 @@ class AsyncHttpResponseProtocol(Protocol):
             compressedstream = StringIO.StringIO(self.data)
             gzipper = gzip.GzipFile(fileobj=compressedstream)
             return gzipper.read()
-        except Exception,e:
+        except Exception as e:
             return json.dumps({"error": str(e)})
 
     def connectionLost(self, reason):
@@ -138,5 +138,5 @@ class AsyncHttpClient(object):
         try:
             self.__deferredResponse.cancel()
             self.__d_agent.cancel()
-        except Exception,e:
+        except Exception as e:
             logger.debug(str(e))
